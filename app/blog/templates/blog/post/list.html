@@ -5,6 +5,7 @@
 {% block content %}
     <h1>My blog</h1>
     {% for post in posts %}
+    <div class="card">
         <h2>
             <a href="{{ post.get_absolute_url }}">
                 {{ post.title }}
@@ -14,6 +15,7 @@
             Published {{ post.publish }} by {{ post.author }}
         </p>
         {{ post.body|truncatewords:30|linebreaks }}
+    </div>
     {% endfor %}
     {% include 'blog/pagination.html' with page=posts %}
 {% endblock %}

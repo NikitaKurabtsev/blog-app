@@ -1,0 +1,150 @@
+{
+    // git
+    "git.openRepositoryInParentFolders": "never",
+
+    // editor
+    "editor.mouseWheelZoom": true,
+    "editor.smoothScrolling": true,
+    "editor.fontSize": 12,
+    "editor.fontFamily": "JetBrains Mono",
+    "editor.rulers": [
+        79
+    ],
+    "[python]": {
+        "editor.formatOnType": true
+    },
+
+    // terminal
+    "terminal.integrated.defaultProfile.windows": "Git Bash",
+    "python.linting.pylintArgs": [
+        "--load-plugins=pylint_django",
+        "--disable=C0111",
+        "--disable=W3101"
+    ],
+
+    // theme
+    "workbench.iconTheme": "vs-minimal", 
+    "workbench.colorTheme": "Evondev Dracula Normal Contrast",
+    "workbench.colorCustomizations": {
+        "editorBracketHighlight.foreground1": "#ffffff",
+        "editorBracketHighlight.foreground2": "#ffffff",
+        "editorBracketHighlight.foreground3": "#ffffff",
+        "editorBracketHighlight.unexpectedBracket.foreground": "#ff0000",
+        },
+    "editor.tokenColorCustomizations": {
+        "[Evondev Dracula Normal Contrast]": {
+            "keywords": "#ea82ff",
+            "strings": "#20E3B2",
+            "textMateRules": [
+                {
+                    "scope": "variable.parameter",
+                    "settings": {
+                    "foreground": "#ffb682",
+                    },
+                     
+                },
+                {
+                    "scope": "entity.name.function",
+                    "settings": {
+                    "foreground": "#82aaff",
+                    },
+                     
+                },
+                {
+                    "scope": ["punctuation.definition.string.begin", "punctuation.definition.string.end"],
+                    "settings": {
+                    "foreground": "#19f09d",
+                    },
+                     
+                },
+                {
+                    "scope": ["meta.function-call.generic.python"],
+                    "settings": {
+                    "foreground": "#82aaff",
+                    },
+                     
+                },
+                {
+                    "scope": ["punc"],
+                    "settings": {
+                    "foreground": "#ffffff",
+                    },
+                     
+                },
+                {
+                    "scope": ["constant.character.escape.python"],
+                    "settings": {
+                    "foreground": "#ea82ff",
+                    },
+                     
+                },
+                {
+                    "scope": ["entity.other.inherited-class.python"],
+                    "settings": {
+                    "foreground": "#ffffff",
+                    },
+                     
+                },
+                {
+                    "scope": ["variable.parameter.function.language.special.self.python"],
+                    "settings": {
+                    "foreground": "#ffb682",
+                    },
+                     
+                },
+                {
+                    "scope": ["constant"],
+                    "settings": {
+                    "foreground": "#fff582",
+                    },
+                     
+                },
+                {
+                    "scope": ["entity.other.attribute-name.html"],
+                    "settings": {
+                    "foreground": "#82aaff",
+                    },
+                     
+                },
+                {
+                    "scope": ["keyword.operator.logical.python"],
+                    "settings": {
+                    "foreground": "#ea82ff",
+                    },
+                     
+                },
+                {
+                    "scope": ["keyword.operator.assignment.python"],
+                    "settings": {
+                    "foreground": "#ea82ff",
+                    },
+                     
+                },
+                {
+                    "scope": ["keyword.operator.comparison.python"],
+                    "settings": {
+                    "foreground": "#ea82ff",
+                    },
+                     
+                },
+                {
+                    "scope": ["keyword.operator.arithmetic.python"],
+                    "settings": {
+                    "foreground": "#ea82ff",
+                    },
+                     
+                },
+                {
+                    "scope": ["support.function.magic.python"],
+                    "settings": {
+                    "foreground": "#82aaff",
+                    },
+                     
+                },
+            
+            ],
+            
+        },
+    }
+
+}

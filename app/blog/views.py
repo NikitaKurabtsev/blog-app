@@ -5,7 +5,7 @@ from django.core.mail import send_mail
 from blog.models import Post
 from blog.forms import EmailPostForm
 
- 
+
 class PostListView(ListView):
     queryset = Post.published.all()
     context_object_name = 'posts'
@@ -42,5 +42,3 @@ def post_detail(request, year, month, day, post):
                                     publish__month=month,
                                     publish__day=day)
     return render(request, 'blog/post/detail.html', {'post_detail': post_detail})
-
-# SECRET_KEY='django-insecure-q^@h^u9@0h!w5vmxn)s5zu(8$zi$3fl5)!pv15ew+g3yuz69)5'

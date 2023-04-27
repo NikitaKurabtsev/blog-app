@@ -29,6 +29,7 @@ def post_share(request, post_id):
             sent = True
     else:
         form = EmailPostForm()
+
     return render(request, 'blog/post/share.html', {'form': form,
                                                     'post': post,
                                                     'sent': sent})
@@ -53,11 +54,11 @@ def post_detail(request, year, month, day, post):
             new_comment.save()
         else:
             form = CommentForm()
-
     context = {
         'post_detail': post_detail,
         'new_comment': new_comment,
         'form': form,
         'comments': comments,
     }
+
     return render(request, 'blog/post/detail.html', context)

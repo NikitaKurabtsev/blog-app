@@ -1,16 +1,41 @@
+from django.core.mail import send_mail
+from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 from django.shortcuts import get_object_or_404, render
 from django.views.generic import ListView
-from django.core.mail import send_mail
+from taggit.models import Tag
 
-from blog.models import Post, Comment
-from blog.forms import EmailPostForm, CommentForm
+from blog.forms import CommentForm, EmailPostForm
+from blog.models import Comment, Post
+
+# class PostListView(ListView):
+#     queryset = Post.published.all()
+#     context_object_name = 'posts'
+#     paginate_by = 3
+#     template_name = 'blog/post/list.html'
 
 
-class PostListView(ListView):
-    queryset = Post.published.all()
-    context_object_name = 'posts'
-    paginate_by = 3
-    template_name = 'blog/post/list.html'
+def post_list(request, tag_slug=None):
+    object_list = Post.published.all()
+    tag = None
+
+    if tag_slug:
+        tag = get_object_or_404(Tag, slug=tag_slug)
+        object_list = object_list.filter(tags__in=[tag])
+    paginator = Paginator(object_list, 3)
+    page = request.GET.get('page')
+    try:
+        posts = paginator.page(page)
+    except PageNotAnInteger:
+        posts = paginator.page(1)
+    except EmptyPage:
+        posts = paginator.page(paginator.num_pages)
+
+    context = {
+        'posts': posts,
+        'page': page,
+        'tag': tag,
+    }
+    return render(request, 'blog/post/list.html', context)
 
 
 def post_share(request, post_id):
@@ -42,7 +67,7 @@ def post_detail(request, year, month, day, post):
                                     publish__year=year,
                                     publish__month=month,
                                     publish__day=day)
-    comments = post.comments.filter(active=True)
+    comments = post_detail.comments.filter(active=True)
     new_comment = None
 
     if request.method == 'POST':
@@ -50,10 +75,10 @@ def post_detail(request, year, month, day, post):
 
         if form.is_valid():
             new_comment = form.save(commit=False)
-            new_comment.post = post
+            new_comment.post = post_detail
             new_comment.save()
-        else:
-            form = CommentForm()
+    else:
+        form = CommentForm()
     context = {
         'post_detail': post_detail,
         'new_comment': new_comment,

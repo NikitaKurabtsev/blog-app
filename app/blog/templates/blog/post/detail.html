@@ -4,6 +4,7 @@
 
 {% block content %}
     <h1>{{ post_detail.title }}</h1>
+    <p class="tags">Tags: {{ post_detail.tags.all|join:", " }}</p>
     <p class="date">
         Published{{ post_detail.publish }} by {{ post_detail.author }}
     </p>
@@ -13,4 +14,33 @@
             Share this post 
         </a>
     </p>
+
+    {% with comments.count as total_comments %}
+        <h2>
+            {{ total_comments }} comment{{ total_comments|pluralize }}
+        </h2>
+    {% endwith %}
+
+    {% for comment in comments %}
+    <div class="comment">
+        <p class="info">
+            Comment {{ forloop.counter }} by {{ comment.name }}
+            {{ comment.created }}
+        </p>
+        {{ comment.body|linebreaks }}
+    </div>
+    {% empty %}
+        <p>There are no comments yet.</p>
+    {% endfor %}
+
+    {% if new_comment %}
+        <h2>Your comment has been added.</h2>
+    {% else %}
+        <h2>Add a new comment</h2>
+        <form method="POST">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <p><input type="submit" value="Add comment"></p>
+        </form>
+    {% endif %}
 {% endblock %}
